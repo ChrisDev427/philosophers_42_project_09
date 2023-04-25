@@ -2,11 +2,13 @@
 
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g 
 
 SRCS =  src/philo.c \
   		src/parsing/ft_atoi.c \
+  		src/parsing/ft_parsing.c \
 		src/lst_utils.c \
+		src/ft_lstprint.c \
 		src/ft_time.c 
 		
 

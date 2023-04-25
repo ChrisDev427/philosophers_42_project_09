@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 07:34:31 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/25 18:08:15 by chris            ###   ########.fr       */
+/*   Created: 2023/04/25 17:32:06 by chris             #+#    #+#             */
+/*   Updated: 2023/04/25 19:02:13 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+void	ft_lstprint(t_list *lst)
 {
-	int	nb;
-	int	i;
+	t_list	*tmp;
+	t_list	*first;
 
-	i = 0;
-	nb = 0;
-	while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-		|| (str[i] == '\v') || (str[i] == '\f' || str[i] == '\r'))
-		i++;
-	if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-		nb = nb * 10 + (str[i++] - '0');
-	return (nb);
+	if (!lst)
+	{
+		printf("Empty list\n");
+		return ;
+	}
+	tmp = lst;
+	first = lst;
+	if (tmp->next == tmp)
+	{
+		
+		printf("%d\n", tmp->philo);
+		return ;
+	}
+	while (1)
+	{
+		
+		printf("%d\n", tmp->philo);
+		if (tmp->next == first)
+			break ;
+		tmp = tmp->next;
+	}
 }

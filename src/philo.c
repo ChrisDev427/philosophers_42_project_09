@@ -3,41 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:41:47 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/25 10:31:48 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/25 19:07:30 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void ft_init(t_philo *philo, char **av)
+{
+    philo->nb_philo = ft_atoi(av[1]);
+    philo->die = ft_atoi(av[2]);
+    philo->eat = ft_atoi(av[3]);
+    philo->sleep = ft_atoi(av[4]);
+    philo->eat_times = ft_atoi(av[5]);
+    philo->table_lst = NULL;
+}
+
 int main(int ac, char **av)
 {
-    ac =0;
-    av = NULL;
-
-    t_list  *list;
+    t_philo philo;
     t_list  *new;
+    int     i;
 
-    list = NULL;
-    new = ft_lstnew(100);
-    ft_lstadd_back(&list, new);
-    new = ft_lstnew(200);
-    ft_lstadd_back(&list, new);
-    new = ft_lstnew(300);
-    ft_lstadd_back(&list, new);
-    new = ft_lstnew(400);
-    ft_lstadd_back(&list, new);
-    new = ft_lstnew(500);
-    ft_lstadd_back(&list, new);
-
+    i = 0;
+    if (ac == 6)
+    {
+        ft_parsing(av);
+        ft_init(&philo, av);
+        while (i != philo.nb_philo)
+        {
+            i++;
+            new = ft_lstnew(i);
+            ft_lstadd_back(&philo.table_lst, new);
+        }
     
-    ft_lstprint(list);
-    printf("lst size = %d\n", ft_lstsize(list));
-    ft_lstdel_all(&list);
-    ft_lstprint(list);
-    printf("lst size = %d\n", ft_lstsize(list));
+
+        ft_lstprint(philo.table_lst);
+        printf("lst size = %d\n", ft_lstsize(philo.table_lst));
+        ft_lstdel_all(&philo.table_lst);
+       
+
+    }
+    else
+        printf("error: five arguments is needed\n");
+
 
 
 
@@ -67,6 +79,6 @@ int main(int ac, char **av)
 
     // // Afficher le temps écoulé
     // printf("Temps d'exécution : %ld millisecondes.\n", elapsed_time);
-
+    // system("leaks philo");
     return (0);
 }
