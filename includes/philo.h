@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/25 18:59:33 by chris            ###   ########.fr       */
+/*   Updated: 2023/04/26 10:10:32 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,18 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstprint(t_list *lst);
 void	ft_lstdel_all(t_list **lst);
 t_list	*ft_lstlast(t_list *lst);
-int	ft_lstsize(t_list *lst);
+int	    ft_lstsize(t_list *lst);
 void    ft_parsing(char **av);
+char	**ft_split(char const *s, char c);
+void    ft_init(t_philo *philo, char **av, int i);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
+
+void    ft_split_arg(t_philo *philo, char *s);
+void	ft_free_str_tab(char **tab);
+
+
+
 // int ft_strs_is_only_digits(char **s);
 
 #endif

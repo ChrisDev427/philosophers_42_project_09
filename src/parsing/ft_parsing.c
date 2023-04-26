@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strs_is_only_digits.c                           :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:17:07 by chris             #+#    #+#             */
-/*   Updated: 2023/04/25 18:52:21 by chris            ###   ########.fr       */
+/*   Updated: 2023/04/26 10:20:18 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 static int	ft_isdigit(char c)
 {
@@ -62,4 +72,21 @@ void    ft_parsing(char **av)
         printf("error: it needs to be at least one philosopher\n");
         exit (1);
     }
+}
+
+int	ft_atoi(const char *str)
+{
+	int	nb;
+	int	i;
+
+	i = 0;
+	nb = 0;
+	while ((str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		|| (str[i] == '\v') || (str[i] == '\f' || str[i] == '\r'))
+		i++;
+	if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+		nb = nb * 10 + (str[i++] - '0');
+	return (nb);
 }

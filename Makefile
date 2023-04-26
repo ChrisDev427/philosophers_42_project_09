@@ -5,10 +5,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g 
 
 SRCS =  src/philo.c \
-  		src/parsing/ft_atoi.c \
   		src/parsing/ft_parsing.c \
-		src/lst_utils.c \
-		src/ft_lstprint.c \
+  		src/parsing/ft_parse_utils.c \
+  		src/parsing/ft_split.c \
+  		src/parsing/ft_substr.c \
+		src/parsing/lst_utils.c \
+		src/parsing/lst_utils2.c \
 		src/ft_time.c 
 		
 

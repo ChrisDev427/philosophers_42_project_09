@@ -3,44 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:41:47 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/25 19:07:30 by chris            ###   ########.fr       */
+/*   Updated: 2023/04/26 10:17:24 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void ft_init(t_philo *philo, char **av)
+static void ft_init_lst(t_philo *philo)
 {
-    philo->nb_philo = ft_atoi(av[1]);
-    philo->die = ft_atoi(av[2]);
-    philo->eat = ft_atoi(av[3]);
-    philo->sleep = ft_atoi(av[4]);
-    philo->eat_times = ft_atoi(av[5]);
-    philo->table_lst = NULL;
+    t_list  *new;
+    int     i;
+
+    i = 0;
+    while (i != philo->nb_philo)
+    {
+        i++;
+        new = ft_lstnew(i);
+        ft_lstadd_back(&philo->table_lst, new);
+    }
 }
 
 int main(int ac, char **av)
 {
     t_philo philo;
-    t_list  *new;
-    int     i;
+    // t_list  *new;
+    // int     i;
 
-    i = 0;
-    if (ac == 6)
+    // i = 0;
+    if (ac == 2 || ac == 6)
     {
-        ft_parsing(av);
-        ft_init(&philo, av);
-        while (i != philo.nb_philo)
+        if (ac == 2)
+            ft_split_arg(&philo, av[1]);
+        else
         {
-            i++;
-            new = ft_lstnew(i);
-            ft_lstadd_back(&philo.table_lst, new);
+            ft_parsing(av);
+            ft_init(&philo, av, 1);
         }
-    
-
+        ft_init_lst(&philo);
+        
         ft_lstprint(philo.table_lst);
         printf("lst size = %d\n", ft_lstsize(philo.table_lst));
         ft_lstdel_all(&philo.table_lst);
