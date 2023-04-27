@@ -1,7 +1,7 @@
 # Makefile
 
 NAME = philo
-CC = gcc
+CC = gcc -pthread
 CFLAGS = -Wall -Wextra -Werror -g 
 
 SRCS =  src/philo.c \

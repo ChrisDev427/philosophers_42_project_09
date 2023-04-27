@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:40:07 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/25 17:52:24 by chris            ###   ########.fr       */
+/*   Updated: 2023/04/27 18:47:55 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_list	*ft_lstnew(unsigned int philo)
+t_list	*ft_lstnew(int philo, int tot_philo, int need_to_eat)
 {
 	t_list	*new;
 
@@ -20,6 +20,10 @@ t_list	*ft_lstnew(unsigned int philo)
 	if (new == NULL)
 		return (NULL);
 	new->philo = philo;
+	new->tot_philo = tot_philo;
+	new->need_to_eat = need_to_eat;
+	new->eated_times = 0;
+	new->fork = 1;
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);
