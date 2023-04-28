@@ -6,33 +6,35 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:40:07 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/27 18:47:55 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:07:14 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_list	*ft_lstnew(int philo, int tot_philo, int need_to_eat)
+t_philo	*ft_lstnew(int id, t_philo *ptr)
 {
-	t_list	*new;
+	t_philo	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_philo));
 	if (new == NULL)
 		return (NULL);
-	new->philo = philo;
-	new->tot_philo = tot_philo;
-	new->need_to_eat = need_to_eat;
+	new->id = id;
 	new->eated_times = 0;
 	new->fork = 1;
+	new->fork_in_hands = 0;
+	new->need_to_eat = ptr->data->eat_times;
+	new->go_sleep = 0;
+	new->data = ptr->data;
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_philo **lst, t_philo *new)
 {
-	t_list	*tmp;
-	t_list	*first;
+	t_philo	*tmp;
+	t_philo	*first;
 	
 	if (!(*lst))
 	{
@@ -50,10 +52,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	first->prev = new;
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_philo	*ft_lstlast(t_philo *lst)
 {
-	t_list	*tmp;
-	t_list	*first;
+	t_philo	*tmp;
+	t_philo	*first;
 	
 	if (!lst)
 		return (NULL);
@@ -70,11 +72,11 @@ t_list	*ft_lstlast(t_list *lst)
 	return (NULL);
 }
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_philo *lst)
 {
 	int		nb_element;
-	t_list	*tmp;
-	t_list	*first;
+	t_philo	*tmp;
+	t_philo	*first;
 
 	if (!lst)
 		return (0);
@@ -90,10 +92,10 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (nb_element);
 }
-void	ft_lstdel_all(t_list **lst)
+void	ft_lstdel_all(t_philo **lst)
 {
-	t_list	*tmp;
-	t_list	*first;
+	t_philo	*tmp;
+	t_philo	*first;
 
 	if (!(*lst))
 		return ;

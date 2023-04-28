@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:40:57 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/27 18:48:38 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/28 14:37:12 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void ft_init(t_philo *philo, char **av, int i)
 {
-    philo->nb_philo = ft_atoi(av[i++]);
-    philo->die = ft_atoi(av[i++]);
-    philo->eat = ft_atoi(av[i++]);
-    philo->sleep = ft_atoi(av[i++]);
-    philo->eat_times = ft_atoi(av[i++]);
-    philo->table_lst = NULL;  
+    
+    philo->data->nb_philo = ft_atoi(av[i++]);
+    philo->data->die = ft_atoi(av[i++]);
+    philo->data->eat = ft_atoi(av[i++]);
+    philo->data->sleep = ft_atoi(av[i++]);
+    philo->data->eat_times = ft_atoi(av[i++]);
+
+     
+    philo->table = NULL;  
 }
 
 void    ft_split_arg(t_philo *philo, char *s)
@@ -51,17 +54,18 @@ void	ft_free_str_tab(char **tab)
 
 void ft_init_lst(t_philo *philo)
 {
-    t_list  *new;
+    t_philo  *new;
     int     i;
 
     i = 0;
    
 
-    while (i != philo->nb_philo)
+    while (i != philo->data->nb_philo)
     {
         i++;
-        new = ft_lstnew(i, philo->nb_philo, philo->eat_times);
-        ft_lstadd_back(&philo->table_lst, new);
+        new = ft_lstnew(i, philo);
+        
+        ft_lstadd_back(&philo->table, new);
     }
     // printf("mutex 1 = %p\n", &philo->table_lst->mutex);
 

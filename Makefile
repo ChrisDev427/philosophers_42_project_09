@@ -2,7 +2,7 @@
 
 NAME = philo
 CC = gcc -pthread
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRCS =  src/philo.c \
   		src/parsing/ft_parsing.c \
@@ -11,7 +11,11 @@ SRCS =  src/philo.c \
   		src/parsing/ft_substr.c \
 		src/parsing/lst_utils.c \
 		src/parsing/lst_utils2.c \
-		src/ft_time.c 
+		src/ft_time.c \
+		src/ft_is_eating.c \
+		src/ft_is_thinking.c \
+		src/ft_is_sleeping.c \
+		src/ft_forks.c 
 		
 
 

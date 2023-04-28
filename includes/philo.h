@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/27 19:06:09 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/28 18:23:40 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,14 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <pthread.h>
+# define RED "\033[3;31m"
+# define GREEN "\033[3;32m"
+# define YELLOW "\033[3;33m"
+# define DEFAULT "\033[0m"
 
 
-typedef struct  s_list
-{
-    int             philo;
-    int             tot_philo;
-    pthread_t       tid;
-    int             fork;
-    int             need_to_eat;
-    int             eated_times;
-    pthread_mutex_t fork_mutex;
-    struct s_list   *next;
-    struct s_list   *prev;
-}               t_list;
 
-typedef struct  s_philo
+typedef struct  s_data
 {
     int             nb_philo;
     int             die;
@@ -40,18 +32,43 @@ typedef struct  s_philo
     int             sleep;
     int             eat_times;
     pthread_mutex_t mutex;
-    t_list          *table_lst;
+    
+    
+}               t_data;
+
+typedef struct  s_philo
+{
+    int             id;
+    int             fork;
+    int             fork_in_hands;
+    int             go_sleep;
+    struct timeval  time_start;
+    
+    int             eated_times;
+    int             need_to_eat;
+    
+    pthread_t       tid;
+    pthread_mutex_t fork_mutex;
+    pthread_mutex_t think_mutex;
+    pthread_mutex_t sleep_mutex;
+   
+
+    struct s_philo   *next;
+    struct s_philo   *prev;
+    struct s_philo   *table;
+    t_data           *data;
 }               t_philo;
 
 
 
+
 //****** linked list ************************************************
-t_list	*ft_lstnew(int philo, int tot_philo, int need_to_eat);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstprint(t_list *lst);
-void	ft_lstdel_all(t_list **lst);
-t_list	*ft_lstlast(t_list *lst);
-int	    ft_lstsize(t_list *lst);
+t_philo	*ft_lstnew(int id, t_philo *ptr);
+void	ft_lstadd_back(t_philo **lst, t_philo *new);
+void	ft_lstprint(t_philo *lst);
+void	ft_lstdel_all(t_philo **lst);
+t_philo	*ft_lstlast(t_philo *lst);
+int	    ft_lstsize(t_philo *lst);
 void    ft_init_lst(t_philo *philo);
 
 //****** parsing ****************************************************
@@ -76,7 +93,14 @@ struct timeval  ft_get_time(void);
 long long       ft_time_stamp(struct timeval t);
 
 long            ft_elapsed_time(struct timeval t1, struct timeval t2);
+//****** forks *******************************************************
 
+void    ft_check_my_fork(t_philo  *philo);
+void    ft_check_left_fork(t_philo  *philo);
+
+void    ft_is_eating(t_philo  *philo);
+void    ft_is_thinking(t_philo  *philo);
+void    ft_is_sleeping(t_philo  *philo);
 
 // int ft_strs_is_only_digits(char **s);
 
