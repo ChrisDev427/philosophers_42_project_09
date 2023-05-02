@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/28 18:23:40 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:29:55 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define RED "\033[3;31m"
 # define GREEN "\033[3;32m"
 # define YELLOW "\033[3;33m"
+# define BLUE "\033[3;34m"
 # define DEFAULT "\033[0m"
 
 
@@ -31,7 +32,7 @@ typedef struct  s_data
     int             eat;
     int             sleep;
     int             eat_times;
-    pthread_mutex_t mutex;
+    pthread_mutex_t mic;
     
     
 }               t_data;
@@ -41,7 +42,7 @@ typedef struct  s_philo
     int             id;
     int             fork;
     int             fork_in_hands;
-    int             go_sleep;
+    int             is_thinking;
     struct timeval  time_start;
     
     int             eated_times;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:41:47 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/28 18:27:40 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:50:00 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ static int  ft_check_eated_times(t_philo *tmp)
 static void	*ft_routines(void *arg)
 {   
     t_philo  *philo = (t_philo *)arg;
-    // struct timeval  time_start;
-
+    
+    if (philo->id % 2 == 0)
+        usleep(20000);
     philo->time_start = ft_get_time();
     while (1)
     {
         // pthread_mutex_lock(&philo->data->mutex);
-       printf("---------------------------philo %d\n", philo->id);
-        if (philo->id % 2 == 1)
-            usleep(50000);
+    //    printf("---------------------------philo %d\n", philo->id);
 
         ft_check_my_fork(philo);
         ft_check_left_fork(philo);
@@ -50,7 +49,7 @@ static void	*ft_routines(void *arg)
             ft_is_thinking(philo);
         }
 
-        sleep(1);
+        // sleep(1);
         if (ft_check_eated_times(philo) == 1)
             break ;
         // pthread_mutex_unlock(&philo->data->mutex);
@@ -83,7 +82,7 @@ int main(int ac, char **av)
         tmp = philo.table;
         // printf("%p\n", &philo.data->mutex);
        
-        pthread_mutex_init(&philo.data->mutex , NULL);
+        pthread_mutex_init(&philo.data->mic , NULL);
         while (i < philo.data->nb_philo)
         {
             pthread_mutex_init(&tmp->fork_mutex, NULL);

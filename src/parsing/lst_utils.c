@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:40:07 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/28 16:07:14 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/04/29 09:27:24 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_philo	*ft_lstnew(int id, t_philo *ptr)
 	new->fork = 1;
 	new->fork_in_hands = 0;
 	new->need_to_eat = ptr->data->eat_times;
-	new->go_sleep = 0;
+	new->is_thinking = 0;
 	new->data = ptr->data;
 	new->prev = NULL;
 	new->next = NULL;
