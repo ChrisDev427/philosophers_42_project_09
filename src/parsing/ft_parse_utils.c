@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:40:57 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/28 14:37:12 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/02 19:16:56 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void ft_init(t_philo *philo, char **av, int i)
     philo->data->eat = ft_atoi(av[i++]);
     philo->data->sleep = ft_atoi(av[i++]);
     philo->data->eat_times = ft_atoi(av[i++]);
+
 
      
     philo->table = NULL;  

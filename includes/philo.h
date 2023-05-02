@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/04/29 09:29:55 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/02 19:17:02 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct  s_data
     int             eat;
     int             sleep;
     int             eat_times;
+    time_t          start_time;
+    time_t          act_time;
+
     pthread_mutex_t mic;
-    
-    
+    pthread_mutex_t check_mutex;   
 }               t_data;
 
 typedef struct  s_philo
@@ -43,17 +45,12 @@ typedef struct  s_philo
     int             fork;
     int             fork_in_hands;
     int             is_thinking;
-    struct timeval  time_start;
-    
     int             eated_times;
     int             need_to_eat;
     
     pthread_t       tid;
     pthread_mutex_t fork_mutex;
-    pthread_mutex_t think_mutex;
-    pthread_mutex_t sleep_mutex;
    
-
     struct s_philo   *next;
     struct s_philo   *prev;
     struct s_philo   *table;
@@ -90,10 +87,12 @@ void	ft_free_str_tab(char **tab);
 
 //****** time *******************************************************
 
-struct timeval  ft_get_time(void);
-long long       ft_time_stamp(struct timeval t);
+time_t  ft_get_time(void);
+time_t  ft_elapsed_time(time_t t1, time_t t2);
+void    ft_sleep(time_t sleep);
+int     ft_check_death(t_philo *philo);
+void    ft_join_destroy(t_philo *philo);
 
-long            ft_elapsed_time(struct timeval t1, struct timeval t2);
 //****** forks *******************************************************
 
 void    ft_check_my_fork(t_philo  *philo);

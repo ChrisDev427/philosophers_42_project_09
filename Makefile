@@ -12,6 +12,9 @@ SRCS =  src/philo.c \
 		src/parsing/lst_utils.c \
 		src/parsing/lst_utils2.c \
 		src/ft_time.c \
+		src/ft_join_destroy.c \
+		src/ft_sleep.c \
+		src/ft_death.c \
 		src/ft_is_eating.c \
 		src/ft_is_thinking.c \
 		src/ft_is_sleeping.c \

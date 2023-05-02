@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_time.c                                          :+:      :+:    :+:   */
+/*   ft_join_destroy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 16:27:04 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 13:04:28 by chmassa          ###   ########.fr       */
+/*   Created: 2023/05/02 15:07:29 by chmassa           #+#    #+#             */
+/*   Updated: 2023/05/02 19:33:43 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-time_t  ft_get_time(void)
+void    ft_join_destroy(t_philo *philo)
 {
-    struct timeval  t;
-    time_t  time;
+    t_philo *tmp;
+    t_philo *first;
 
-    if (gettimeofday(&t, NULL) != 0)
-        printf("Error gettimeofday().\n");
-    time = (long)(t.tv_sec) * 1000 + (long)(t.tv_usec) / 1000;
-    return (time);
-}
-
-time_t    ft_elapsed_time(time_t t1, time_t t2)
-{
-    return (t2 - t1);
+    tmp = philo->table;
+    first = philo->table;
+    while (1)
+    {
+        pthread_join(tmp->tid , NULL);
+        // pthread_mutex_destroy(&tmp->fork_mutex);
+        if (tmp->next == first)
+            break ;
+        tmp = tmp->next;
+    }
+//     pthread_mutex_destroy(&philo->data->check_mutex);
+//     pthread_mutex_destroy(&philo->data->mic);
 }
