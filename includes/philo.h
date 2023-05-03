@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 19:17:02 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 18:45:00 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <pthread.h>
-# define RED "\033[3;31m"
-# define GREEN "\033[3;32m"
-# define YELLOW "\033[3;33m"
-# define BLUE "\033[3;34m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;36m"
+# define NBLUE "\033[1;34m"
 # define DEFAULT "\033[0m"
 
 
@@ -32,10 +33,12 @@ typedef struct  s_data
     int             eat;
     int             sleep;
     int             eat_times;
+    int             args;
     time_t          start_time;
     time_t          act_time;
-
+    struct s_philo  *table;
     pthread_mutex_t mic;
+    pthread_mutex_t eated_mutex;
     pthread_mutex_t check_mutex;   
 }               t_data;
 
@@ -47,13 +50,14 @@ typedef struct  s_philo
     int             is_thinking;
     int             eated_times;
     int             need_to_eat;
+    time_t          meal_time;
     
     pthread_t       tid;
     pthread_mutex_t fork_mutex;
    
     struct s_philo   *next;
     struct s_philo   *prev;
-    struct s_philo   *table;
+    // struct s_philo   *table;
     t_data           *data;
 }               t_philo;
 
@@ -92,6 +96,7 @@ time_t  ft_elapsed_time(time_t t1, time_t t2);
 void    ft_sleep(time_t sleep);
 int     ft_check_death(t_philo *philo);
 void    ft_join_destroy(t_philo *philo);
+int   ft_waiter(t_philo *philo);
 
 //****** forks *******************************************************
 

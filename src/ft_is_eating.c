@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_eating.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:25:29 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 14:06:15 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 17:34:16 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void    ft_is_eating(t_philo  *philo)
 {
     pthread_mutex_lock(&philo->data->mic);
-    printf(GREEN"%ld %d is eating...\n"DEFAULT,ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->id);
+    printf(GREEN"%ld   %4d   is eating...\n"DEFAULT,ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->id);
     pthread_mutex_unlock(&philo->data->mic);
+    philo->meal_time = ft_get_time();
     ft_sleep(philo->data->eat * 1000);
     philo->fork = 1;
     philo->prev->fork = 1;

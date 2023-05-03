@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_thinking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:37:38 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 13:01:26 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 17:34:22 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    ft_is_thinking(t_philo  *philo)
     {
         pthread_mutex_lock(&philo->data->mic);
         philo->is_thinking = 1;
-        printf(YELLOW"%ld %d is thinking...\n"DEFAULT,ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->id);
+        printf(YELLOW"%ld   %4d   is thinking...\n"DEFAULT,ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->id);
         pthread_mutex_unlock(&philo->data->mic);
     }
     

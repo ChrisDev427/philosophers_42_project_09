@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join_destroy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:07:29 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 19:33:43 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 16:34:29 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void    ft_join_destroy(t_philo *philo)
     t_philo *tmp;
     t_philo *first;
 
-    tmp = philo->table;
-    first = philo->table;
+    tmp = philo->data->table;
+    first = philo->data->table;
     while (1)
     {
         pthread_join(tmp->tid , NULL);
@@ -27,6 +27,6 @@ void    ft_join_destroy(t_philo *philo)
             break ;
         tmp = tmp->next;
     }
-//     pthread_mutex_destroy(&philo->data->check_mutex);
-//     pthread_mutex_destroy(&philo->data->mic);
+    pthread_mutex_destroy(&philo->data->check_mutex);
+    pthread_mutex_destroy(&philo->data->mic);
 }

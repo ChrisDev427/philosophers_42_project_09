@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:40:57 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 19:16:56 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 18:44:55 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void ft_init(t_philo *philo, char **av, int i)
     philo->data->die = ft_atoi(av[i++]);
     philo->data->eat = ft_atoi(av[i++]);
     philo->data->sleep = ft_atoi(av[i++]);
-    philo->data->eat_times = ft_atoi(av[i++]);
-
-
-     
-    philo->table = NULL;  
+    if (philo->data->args == 6)
+        philo->data->eat_times = ft_atoi(av[i++]);
+    philo->data->table = NULL;  
 }
 
 void    ft_split_arg(t_philo *philo, char *s)
@@ -66,7 +64,7 @@ void ft_init_lst(t_philo *philo)
         i++;
         new = ft_lstnew(i, philo);
         
-        ft_lstadd_back(&philo->table, new);
+        ft_lstadd_back(&philo->data->table, new);
     }
     // printf("mutex 1 = %p\n", &philo->table_lst->mutex);
 

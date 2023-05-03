@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_death.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:30:10 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 19:22:20 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:04:43 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void    ft_death(t_philo *lst)
         tmp = tmp->next;
     }
     puts("AAAAA");
-    // pthread_mutex_unlock(&philo->data->mic);
+    // pthread_mutex_unlock(&tmp->data->mic);
     pthread_mutex_destroy(&tmp->data->check_mutex);
     pthread_mutex_destroy(&tmp->data->mic);
 }
@@ -50,7 +50,7 @@ int ft_check_death(t_philo *philo)
         {
             pthread_mutex_lock(&philo->data->mic);
             printf("%ld philo %d died\n", ft_elapsed_time(philo->data->start_time, ft_get_time()), tmp->id);
-            pthread_mutex_unlock(&philo->data->mic);
+            // pthread_mutex_unlock(&philo->data->mic);
             // pthread_mutex_unlock(&philo->data->exit);
 
 
