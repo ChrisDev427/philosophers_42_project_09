@@ -6,7 +6,7 @@
 /*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:03:42 by chris             #+#    #+#             */
-/*   Updated: 2023/05/03 18:46:30 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/03 22:20:37 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,27 @@ static void	*ft_routines(void *arg)
     }
 	return (NULL);
 }
-
-int main(int ac, char **av)
+static void ft_threads_create(t_philo *philo)
 {
-    int i;
-    t_philo philo;
+    int      i;
     t_philo  *tmp;
 
     i = 0;
+    tmp = philo->data->table;
+
+    while (i < philo->data->nb_philo)
+    {
+        pthread_mutex_init(&philo->fork_mutex, NULL);
+        pthread_create(&philo->tid , NULL, &ft_routines, tmp);
+        i++;
+        tmp = tmp->next;
+    }
+}
+
+int main(int ac, char **av)
+{
+    t_philo philo;
+   
     philo.data = malloc(sizeof(t_data));
     philo.data->args = ac;
     if (ac == 2 || ac == 5 || ac == 6)
@@ -59,25 +72,13 @@ int main(int ac, char **av)
             ft_init(&philo, av, 1);
         }       
         ft_init_lst(&philo);
-        tmp = philo.data->table;
         ft_mutex_init(&philo);
         philo.data->start_time = ft_get_time();
-        while (i < philo.data->nb_philo)
-        {
-            pthread_mutex_init(&tmp->fork_mutex, NULL);
-            pthread_create(&tmp->tid , NULL, &ft_routines, tmp);
-            i++;
-            tmp = tmp->next;
-        }
+        ft_threads_create(&philo);
         if (ft_waiter(&philo) == -1)
             return (0);
-        
-        // ft_join_destroy(&philo);
-        // ft_lstprint(philo.table);
-        // // printf("lst size = %d\n", ft_lstsize(philo.table_lst));
-        // ft_lstdel_all(&philo.data->table);
     }
     else
-        printf("error: five arguments is needed\n");
+        printf("error: invalid arguments\n");
     return (0);
 }

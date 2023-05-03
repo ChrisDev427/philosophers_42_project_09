@@ -6,16 +6,38 @@
 /*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:31:25 by chris             #+#    #+#             */
-/*   Updated: 2023/05/03 18:39:18 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/03 22:27:59 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static int  ft_check_meals(t_philo *philo, t_philo *tmp)
+{
+    static int  check = 0;
+
+    if (philo->data->args == 6)
+    {
+        if (tmp->eated_times > tmp->need_to_eat)
+        {
+            pthread_mutex_lock(&tmp->data->check_mutex);
+            check++;
+            pthread_mutex_unlock(&tmp->data->check_mutex);
+        }
+        if (check >= tmp->data->nb_philo)
+        {
+            pthread_mutex_lock(&philo->data->mic);
+            printf(GREEN"%1ld   every philosophers has eaten at least %d times...\n"DEFAULT, ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->data->eat_times);
+            ft_lstdel_all(&philo->data->table);
+            return (-1);
+        }
+    }
+    return (0);
+}
+
 int   ft_waiter(t_philo *philo)
 {
     t_philo *tmp;
-    static int  check = 0;
 
     tmp = philo->data->table;
     while (1)
@@ -29,19 +51,8 @@ int   ft_waiter(t_philo *philo)
         }
         if (philo->data->args == 6)
         {
-            if (tmp->eated_times > tmp->need_to_eat)
-            {
-                pthread_mutex_lock(&tmp->data->check_mutex);
-                check++;
-                pthread_mutex_unlock(&tmp->data->check_mutex);
-            }
-            if (check >= tmp->data->nb_philo)
-            {
-                pthread_mutex_lock(&philo->data->mic);
-                printf(GREEN"%1ld   every philosophers has eaten at least %d times...\n"DEFAULT, ft_elapsed_time(philo->data->start_time, ft_get_time()), philo->data->eat_times);
-                ft_lstdel_all(&philo->data->table);
+            if (ft_check_meals(philo, tmp) == -1)
                 return (-1);
-            }
         }
         tmp = tmp->next;
     }
