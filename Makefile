@@ -16,6 +16,7 @@ SRCS =  src/philo.c \
 		src/ft_sleep.c \
 		src/ft_death.c \
 		src/ft_waiter.c \
+		src/ft_print.c \
 		src/ft_is_eating.c \
 		src/ft_is_thinking.c \
 		src/ft_is_sleeping.c \

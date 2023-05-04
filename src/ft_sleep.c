@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 14:01:35 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/02 14:56:39 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/04 17:52:30 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    ft_sleep(time_t sleep)
     }
     while (time < sleep)
     {
-        usleep(100);
+        usleep(50);
         if (gettimeofday(&actual_time, NULL) != 0)
         {
             printf("Error gettimeofday().\n");

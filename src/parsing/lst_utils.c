@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:40:07 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/03 16:41:10 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/04 16:32:47 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,18 @@ void	ft_lstdel_all(t_philo **lst)
 	if (!(*lst))
 		return ;
 	first = *lst;
+	tmp = *lst;
 	while (1)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		if (tmp->next == first)
-		{
-			free(tmp);
-			break ;
-		}
+	{puts("AAAA");
+		// if (tmp->next == first)
+		// {puts("BBBB");
+		// 	free(tmp);
+		// 	break ;
+		// }
 		free(tmp);
+		if (tmp->next == first)
+			break ;
+		tmp = tmp->next;
 	}
 	*lst = NULL;
 }

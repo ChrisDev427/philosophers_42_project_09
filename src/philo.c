@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:03:42 by chris             #+#    #+#             */
-/*   Updated: 2023/05/03 22:20:37 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/04 18:16:30 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ static void ft_mutex_init(t_philo *philo)
     pthread_mutex_init(&philo->data->mic , NULL);
     pthread_mutex_init(&philo->data->check_mutex , NULL);
     pthread_mutex_init(&philo->data->eated_mutex , NULL);
+    pthread_mutex_init(&philo->data->mutex , NULL);
 }
 
 static void	*ft_routines(void *arg)
 {   
     t_philo  *philo = (t_philo *)arg;
     
-    if (philo->id % 2 == 0)
-        ft_sleep(22000);
+    if (philo->id % 2 != 0)
+        ft_sleep(20000);
     while (1)
     {
         ft_check_my_fork(philo);
@@ -33,9 +34,12 @@ static void	*ft_routines(void *arg)
         {
             ft_is_eating(philo);
             ft_is_sleeping(philo);
+            ft_is_thinking(philo);
         }
         else
+        {
             ft_is_thinking(philo);
+        }
     }
 	return (NULL);
 }
@@ -75,10 +79,10 @@ int main(int ac, char **av)
         ft_mutex_init(&philo);
         philo.data->start_time = ft_get_time();
         ft_threads_create(&philo);
-        if (ft_waiter(&philo) == -1)
-            return (0);
+        ft_waiter(&philo);
     }
     else
         printf("error: invalid arguments\n");
+    // system("leaks philo");
     return (0);
 }
