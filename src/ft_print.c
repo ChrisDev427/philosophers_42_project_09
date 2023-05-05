@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:48:23 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/04 19:08:35 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/05 14:07:27 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static void	ft_putnbr(int n)
 	}
 }
 
-void    ft_print(time_t time, int philo, char *s)
+void	ft_print(time_t time, int philo, char *s)
 {
-    ft_putnbr(time);
-    ft_putchar(' ');
-    ft_putnbr(philo);
-    ft_putchar(' ');
-    ft_putstr(s);
-    ft_putchar('\n');
+	ft_putnbr(time);
+	ft_putchar(' ');
+	ft_putnbr(philo);
+	ft_putchar(' ');
+	ft_putstr(s);
+	ft_putchar('\n');
 }

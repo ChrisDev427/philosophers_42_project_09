@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:40:57 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/03 18:44:55 by chris            ###   ########.fr       */
+/*   Updated: 2023/05/05 14:17:52 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_init(t_philo *philo, char **av, int i)
+void	ft_init(t_philo *philo, char **av, int i)
 {
-    
-    philo->data->nb_philo = ft_atoi(av[i++]);
-    philo->data->die = ft_atoi(av[i++]);
-    philo->data->eat = ft_atoi(av[i++]);
-    philo->data->sleep = ft_atoi(av[i++]);
-    if (philo->data->args == 6)
-        philo->data->eat_times = ft_atoi(av[i++]);
-    philo->data->table = NULL;  
+	philo->data->nb_philo = ft_atoi(av[i++]);
+	philo->data->die = ft_atoi(av[i++]);
+	philo->data->eat = ft_atoi(av[i++]);
+	philo->data->sleep = ft_atoi(av[i++]);
+	if (philo->data->args == 6)
+		philo->data->eat_times = ft_atoi(av[i++]);
+	philo->data->table = NULL;
+	pthread_mutex_init(&philo->data->mic, NULL);
+	pthread_mutex_init(&philo->data->mutex, NULL);
 }
 
-void    ft_split_arg(t_philo *philo, char *s)
+void	ft_split_arg(t_philo *philo, char *s)
 {
-    char    **ret;
+	char	**ret;
 
-    ret = ft_split(s, ' ');
-    if (!ret)
-        return ;
-    ft_parsing(ret);
-    ft_init(philo, ret, 0);
-    ft_free_str_tab(ret);
+	ret = ft_split(s, ' ');
+	if (!ret)
+		return ;
+	ft_parsing(ret);
+	ft_init(philo, ret, 0);
+	ft_free_str_tab(ret);
 }
 
 void	ft_free_str_tab(char **tab)
@@ -51,21 +52,16 @@ void	ft_free_str_tab(char **tab)
 	free(tab);
 }
 
-void ft_init_lst(t_philo *philo)
+void	ft_init_lst(t_philo *philo)
 {
-    t_philo  *new;
-    int     i;
+	t_philo	*new;
+	int		i;
 
-    i = 0;
-   
-
-    while (i != philo->data->nb_philo)
-    {
-        i++;
-        new = ft_lstnew(i, philo);
-        
-        ft_lstadd_back(&philo->data->table, new);
-    }
-    // printf("mutex 1 = %p\n", &philo->table_lst->mutex);
-
+	i = 0;
+	while (i != philo->data->nb_philo)
+	{
+		i++;
+		new = ft_lstnew(i, philo);
+		ft_lstadd_back(&philo->data->table, new);
+	}
 }

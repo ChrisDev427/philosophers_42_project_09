@@ -6,7 +6,7 @@
 /*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/04 18:59:29 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/05 14:25:58 by chmassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,31 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new);
 void	ft_lstprint(t_philo *lst);
 void	ft_lstdel_all(t_philo **lst);
 t_philo	*ft_lstlast(t_philo *lst);
-int	    ft_lstsize(t_philo *lst);
-void    ft_init_lst(t_philo *philo);
+int		ft_lstsize(t_philo *lst);
+void	ft_init_lst(t_philo *philo);
 //****** parsing ****************************************************
-void    ft_parsing(char **av);
-int	    ft_atoi(const char *str);
-void    ft_split_arg(t_philo *philo, char *s);
+void	ft_parsing(char **av);
+int		ft_atoi(const char *str);
+void	ft_split_arg(t_philo *philo, char *s);
 char	**ft_split(char const *s, char c);
-void    ft_init(t_philo *philo, char **av, int i);
+void	ft_init(t_philo *philo, char **av, int i);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 void	ft_free_str_tab(char **tab);
 //****** pthread functions ******************************************
-void    ft_join_destroy(t_philo *philo);
+void	ft_join_destroy(t_philo *philo);
 //****** time *******************************************************
-time_t  ft_get_time(void);
-time_t  ft_elapsed_time(time_t t1, time_t t2);
-void    ft_sleep(time_t sleep);
-int     ft_check_death(t_philo *philo);
-int     ft_waiter(t_philo *philo);
+time_t	ft_get_time(void);
+time_t	ft_elapsed_time(time_t t1, time_t t2);
+void	ft_sleep(time_t sleep);
+int		ft_check_death(t_philo *philo);
+int		ft_waiter(t_philo *philo);
 //****** forks *******************************************************
-void    ft_check_my_fork(t_philo  *philo);
-void    ft_check_left_fork(t_philo  *philo);
+void	ft_check_my_fork(t_philo *philo);
+void	ft_check_left_fork(t_philo *philo);
 //****** routines ****************************************************
-void    ft_is_eating(t_philo  *philo);
-void    ft_is_thinking(t_philo  *philo);
-void    ft_is_sleeping(t_philo  *philo);
-void    ft_print(time_t time, int philo, char *s);
+void	ft_is_eating(t_philo *philo);
+void	ft_is_thinking(t_philo *philo);
+void	ft_is_sleeping(t_philo *philo);
+void	ft_print(time_t time, int philo, char *s);
 #endif
