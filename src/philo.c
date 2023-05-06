@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:03:42 by chris             #+#    #+#             */
-/*   Updated: 2023/05/05 13:58:36 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/06 09:17:04 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,21 @@ int	main(int ac, char **av)
 	if (ac == 2 || ac == 5 || ac == 6)
 	{
 		if (ac == 2)
-			ft_split_arg(&philo, av[1]);
-		else
+			if (ft_split_arg(&philo, av[1]) == -1)
+				return (0);
+		if (ac == 5 || ac == 6)
 		{
-			ft_parsing(av);
+			if(ft_parsing(av) == -1)
+				return (0);
 			ft_init(&philo, av, 1);
 		}
 		ft_init_lst(&philo);
 		philo.data->start_time = ft_get_time();
 		ft_threads_create(&philo);
-		ft_waiter(&philo);
+		if (ft_waiter(&philo) == -1)
+			return (0);
 	}
 	else
 		printf("error: invalid arguments\n");
-	ft_join_destroy(&philo);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:17:07 by chris             #+#    #+#             */
-/*   Updated: 2023/05/05 14:16:26 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/06 09:05:21 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,29 @@ static int	ft_strs_is_only_digits(char **s)
 	return (0);
 }
 
-void	ft_parsing(char **av)
+int	ft_parsing(char **av)
 {
+	if (av[1] == NULL)
+	{
+		printf("error: invalid arguments number\n");
+		return (-1);
+	}
 	if (ft_strs_is_only_digits(av) == 1)
 	{
 		printf("error: numeric arguments is required\n");
-		exit (1);
+		return (-1);
 	}
 	if (ft_strs_is_only_digits(av) == 2)
 	{
 		printf("error: negative number is forbidden\n");
-		exit (1);
+		return (-1);
 	}
 	if (av[1][0] == '0')
 	{
 		printf("error: it needs to be at least one philosopher\n");
-		exit (1);
+		return (-1);
 	}
+	return (0);
 }
 
 int	ft_atoi(const char *str)

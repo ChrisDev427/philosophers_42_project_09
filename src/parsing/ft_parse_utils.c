@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:40:57 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/05 14:17:52 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/06 09:11:03 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,18 @@ void	ft_init(t_philo *philo, char **av, int i)
 	pthread_mutex_init(&philo->data->mutex, NULL);
 }
 
-void	ft_split_arg(t_philo *philo, char *s)
+int	ft_split_arg(t_philo *philo, char *s)
 {
 	char	**ret;
 
 	ret = ft_split(s, ' ');
 	if (!ret)
-		return ;
-	ft_parsing(ret);
+		return (-1);
+	if (ft_parsing(ret) == -1)
+		return (-1);
 	ft_init(philo, ret, 0);
 	ft_free_str_tab(ret);
+	return (0);
 }
 
 void	ft_free_str_tab(char **tab)

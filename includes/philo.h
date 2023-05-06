@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:39:39 by chmassa           #+#    #+#             */
-/*   Updated: 2023/05/05 14:25:58 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/06 09:11:49 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_philo	*ft_lstlast(t_philo *lst);
 int		ft_lstsize(t_philo *lst);
 void	ft_init_lst(t_philo *philo);
 //****** parsing ****************************************************
-void	ft_parsing(char **av);
+int     ft_parsing(char **av);
 int		ft_atoi(const char *str);
-void	ft_split_arg(t_philo *philo, char *s);
+int	    ft_split_arg(t_philo *philo, char *s);
 char	**ft_split(char const *s, char c);
 void	ft_init(t_philo *philo, char **av, int i);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

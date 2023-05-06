@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_waiter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chmassa <chmassa@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chris <chris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:31:25 by chris             #+#    #+#             */
-/*   Updated: 2023/05/05 14:01:51 by chmassa          ###   ########.fr       */
+/*   Updated: 2023/05/06 08:45:07 by chris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static int	ft_check_meals(t_philo *philo, t_philo *tmp)
 			printf(GREEN"%ld every philosophers has eaten at least %d times\n"
 				DEFAULT, ft_elapsed_time(philo->data->start_time,
 					ft_get_time()), philo->data->eat_times);
-			return (-1);
+                    {
+	                    ft_join_destroy(philo);
+			            return (-1);
+                    }
 		}
 	}
 	return (0);
@@ -61,7 +64,10 @@ int	ft_waiter(t_philo *philo)
 		if (philo->data->args == 6)
 		{
 			if (ft_check_meals(philo, tmp) == -1)
+            {
+	            ft_join_destroy(philo);
 				return (-1);
+            }
 		}
 		tmp = tmp->next;
 	}
